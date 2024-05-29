@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik&family=Secular+One&display=swap");
+
+:root {
+  --fonte01: "Rubik", sans-serif;
+  --fonte02: "Secular One", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  overflow: hidden;/*No final do projeto, a tela tinha uma rolagem vertical, escondemos o que estava transbordando*/
+}
+
+/*Efeito preto à esquerda, com pseudo-elemento (colocar um elemento qualquer na página)*/
+main::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh; /*Ocupa 100% da altura da viewport*/
+  width: 80vw; /*Ocupa 80% da largura da viewport*/
+
+  background: linear-gradient(-233deg, black 40%, rgba(0, 0, 0, 0) 65%)
+    no-repeat;
+}
+
+main .personagem {
+  display: none; /*Some os demais personagens*/
+  height: 100vh; /*Imagem precisa ocupar toda a minha tela*/
+}
+
+main .personagem.selecionado {
+  display: block; /*Aparece somente o Luffy*/
+}
+
+main .personagem .imagem {
+  /*Ajustar a imagem, pois ela estava gigante*/
+  height: 100%;
+  width: 100%;
+  object-fit: cover; /*Não deixa a imagem esticada após eu aplicar o heigh:100vh*/
+}
+
+.conteudo {
+  /*Posicionando o conteúdo em cima da imagem*/
+  position: absolute; /*Ponto de partida para config de topo, left, right, bottom*/
+  top: 0;
+  left: 120px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /*Conteúdo não centralizou, porém vamos precisar de espaço para centralizar o conteúdo, para ter:*/
+  min-height: 100vh;
+  max-width: 380px;
+
+  z-index: 1; /*Após fazer o efeito ::after, o conteúdo ficou para trás, com o z-index colocamos acima*/
+}
+
+.conteudo .logo {
+  /*Chamando a imagem do logo, mas ela não vai aparecer, precisamos definir largura e altura que queremos + área que vai cobrir com o background-size: cover*/
+  background-image: url("../img/one-piece-logo.png");
+  background-size: cover;
+  height: 100px;
+  width: 230px;
+  margin-bottom: 35px;
+}
+
+.conteudo .nome-personagem {
+  color: white;
+  font-size: 48px; /*Tam padrão do navegador é 16px*/
+  font-family: var(--fonte02);
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.conteudo .descricao {
+  color: white;
+  font-family: var(--fonte01);
+  line-height: 24px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.botoes {
+  /*Colocando os botões no canto superior direito*/
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 180px; /*Deixar os botões mais para dentro*/
+  justify-content: center;
+  align-items: center;
+  /*Espaço entre os botões, quando usao display: flex, posso usar ele*/
+  gap: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/*Estilizando a tag button*/
+.botoes .botao {
+  border: none;
+  background: black;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.botoes .botao img {
+  border-radius: 50%;
+}
+
+.botoes .botao.selecionado {
+  transform: scale(1.2); /*Botão selecionado vai ficar maior*/
+  box-shadow: 0 0 10px #D9D9D9;
+}
